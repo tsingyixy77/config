@@ -1,0 +1,43 @@
+#!/bin/bash
+cp zshrc ~/.zshrc
+cp aliases ~/.aliases
+git clone https://gitee.com/tsingyixy/oh-my-zsh.git ~/.oh-my-zsh
+git clone https://gitee.com/tsingyixy/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+git clone https://gitee.com/tsingyixy/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions
+git clone https://gitee.com/tsingyixy/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+cp gitconfig ~/.gitconfig
+#
+#echo "configure vim ..."
+cp vimrc ~/.vimrc
+git clone https://gitee.com/tsingyixy/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+git clone https://gitee.com/tsingyixy/AutoComplPop.git ~/.vim/bundle/AutoComplPop
+git clone https://gitee.com/tsingyixy/vim-one.git ~/.vim/bundle/vim-one
+git clone https://gitee.com/tsingyixy/vim-airline.git ~/.vim/bundle/vim-airline
+git clone https://gitee.com/tsingyixy/vim-airline-themes.git ~/.vim/bundle/vim-airline-themes
+#vim -c qa
+REPO='dnf install -y '
+dnf --version > /dev/null 2>&1
+if [[ $? != 0 ]];then
+	REPO='apt install -y '
+	apt --version > /dev/null 2>&1
+	if [[ $? != 0 ]];then
+		pacman --version > /dev/null 2>&1
+		REPO='pacman -S --noconfirm '
+	fi
+fi
+$REPO zsh
+vim -c PluginInstall
+#echo "configure gnome-shell ..."
+#sudo cp /usr/share/gnome-shell/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource.bak
+#sudo cp gnome-shell-theme.gresource /usr/share/gnome-shell/
+#tar -zxf seven.tar.gz
+#mkdir ~/.themes/
+#mv seven ~/.themes/
+#
+#sudo pacman -S --noconfirm archlinuxcn/gnome-shell-extension-dash-to-dock-git
+#sudo pacman -S --noconfirm community/papirus-icon-theme
+#sudo pacman -S --noconfirm extra/gnome-tweaks
+#
+#gsettings set org.gnome.desktop.interface gtk-theme seven
+#gsettings set org.gnome.desktop.interface icon-theme papirus
+#gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true ##gtkinspector
